@@ -255,6 +255,7 @@ resource "aws_launch_template" "bastion_launch_template" {
 }
 
 resource "aws_autoscaling_group" "bastion_auto_scaling_group" {
+  count       = var.bastion_instance_count >= 1 ? 1 : 0
   name_prefix = "ASG-${local.name_prefix}"
   launch_template {
     id      = aws_launch_template.bastion_launch_template.id
