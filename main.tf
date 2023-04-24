@@ -152,8 +152,8 @@ resource "aws_route53_record" "bastion_record_name" {
 
   alias {
     evaluate_target_health = true
-    name                   = aws_lb.bastion_lb.dns_name
-    zone_id                = aws_lb.bastion_lb.zone_id
+    name                   = aws_lb.bastion_lb[0].dns_name
+    zone_id                = aws_lb.bastion_lb[0].zone_id
   }
 }
 
