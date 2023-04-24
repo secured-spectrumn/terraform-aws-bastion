@@ -158,7 +158,7 @@ resource "aws_route53_record" "bastion_record_name" {
 }
 
 resource "aws_lb" "bastion_lb" {
-  count    = var.bastion_instance_count = 0 ? 0 : 1
+  count    = var.bastion_instance_count >= 1 ? 1 : 0
   internal = var.is_lb_private
   name     = "${local.name_prefix}-lb"
 
@@ -169,7 +169,7 @@ resource "aws_lb" "bastion_lb" {
 }
 
 resource "aws_lb_target_group" "bastion_lb_target_group" {
-  count       = var.bastion_instance_count = 0 ? 0 : 1
+  count       = var.bastion_instance_count >= 1 ? 1 : 0
   name        = "${local.name_prefix}-lb-target"
   port        = var.public_ssh_port
   protocol    = "TCP"
@@ -185,7 +185,7 @@ resource "aws_lb_target_group" "bastion_lb_target_group" {
 }
 
 resource "aws_lb_listener" "bastion_lb_listener_22" {
-  count    = var.bastion_instance_count = 0 ? 0 : 1
+  count       = var.bastion_instance_count >= 1 ? 1 : 0
   default_action {
     target_group_arn = aws_lb_target_group.bastion_lb_target_group[0].arn
     type             = "forward"
