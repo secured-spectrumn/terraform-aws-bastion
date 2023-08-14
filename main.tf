@@ -158,12 +158,7 @@ resource "aws_route53_record" "bastion_record_name" {
 }
 
 resource "aws_lb" "bastion_lb" {
-<<<<<<< HEAD
   count    = var.bastion_instance_count >= 1 ? 1 : 0
-=======
-  count = var.create_elb ? 1 : 0
-
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
   internal = var.is_lb_private
   name     = "${local.name_prefix}-lb"
 
@@ -181,12 +176,7 @@ resource "aws_lb" "bastion_lb" {
 }
 
 resource "aws_lb_target_group" "bastion_lb_target_group" {
-<<<<<<< HEAD
   count       = var.bastion_instance_count >= 1 ? 1 : 0
-=======
-  count = var.create_elb ? 1 : 0
-
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
   name        = "${local.name_prefix}-lb-target"
   port        = var.public_ssh_port
   protocol    = "TCP"
@@ -202,12 +192,7 @@ resource "aws_lb_target_group" "bastion_lb_target_group" {
 }
 
 resource "aws_lb_listener" "bastion_lb_listener_22" {
-<<<<<<< HEAD
   count       = var.bastion_instance_count >= 1 ? 1 : 0
-=======
-  count = var.create_elb ? 1 : 0
-
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
   default_action {
     target_group_arn = aws_lb_target_group.bastion_lb_target_group[0].arn
     type             = "forward"
@@ -301,15 +286,9 @@ resource "aws_autoscaling_group" "bastion_auto_scaling_group" {
   health_check_grace_period = 180
   health_check_type         = "EC2"
 
-<<<<<<< HEAD
   target_group_arns = [
     aws_lb_target_group.bastion_lb_target_group[0].arn,
   ]
-=======
-  target_group_arns = var.create_elb ? [
-    aws_lb_target_group.bastion_lb_target_group[0].arn,
-  ] : null
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
 
   termination_policies = [
     "OldestLaunchConfiguration",
