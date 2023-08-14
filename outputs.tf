@@ -18,8 +18,6 @@ output "bucket_arn" {
   value       = aws_s3_bucket.bucket.arn
 }
 
-<<<<<<< HEAD
-=======
 output "bucket_kms_key_alias" {
   description = "The name of the KMS key alias for the bucket"
   value       = aws_kms_alias.alias.name
@@ -45,16 +43,12 @@ output "elb_ip" {
   value       = var.create_elb ? try(aws_lb.bastion_lb[0].dns_name, null) : null
 }
 
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
 output "private_instances_security_group" {
   description = "The ID of the security group for private instances"
   value       = aws_security_group.private_instances_security_group.id
 }
-<<<<<<< HEAD
-=======
 
 output "target_group_arn" {
   description = "The ARN of the target group for the ELB"
   value       = var.create_elb ? try(aws_lb_target_group.bastion_lb_target_group[0].arn, null) : null
 }
->>>>>>> 3de458b4133c60ca6b3b780aca2ff6999e9cf216
