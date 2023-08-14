@@ -1,6 +1,6 @@
 output "bastion_auto_scaling_group_name" {
   description = "The name of the Auto Scaling Group for bastion hosts"
-  value       = aws_autoscaling_group.bastion_auto_scaling_group.name
+  value       = aws_autoscaling_group.bastion_auto_scaling_group[0].name
 }
 
 output "bastion_elb_id" {
