@@ -89,6 +89,30 @@ variable "bucket_versioning" {
   description = "Enable bucket versioning or not"
 }
 
+variable "block_public_acls" {
+  type        = bool
+  default     = true
+  description = "Block public acls on bucket"
+}
+
+variable "block_public_policy" {
+  type        = bool
+  default     = true
+  description = "Block public policy on bucket"
+}
+
+variable "ignore_public_acls" {
+  type        = bool
+  default     = true
+  description = "Ignore public acls on bucket"
+}
+
+variable "restrict_public_buckets" {
+  type        = bool
+  default     = true
+  description = "Restrict public buckets on bucket"
+}
+
 variable "cidrs" {
   type        = list(string)
   description = "List of CIDRs that can access the bastion. Default: 0.0.0.0/0"
